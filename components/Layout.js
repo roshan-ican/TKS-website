@@ -1,8 +1,24 @@
+import axios from "axios"
 import Head from "next/head"
 import Link from "next/link"
-import React from "react"
+import React, { useEffect } from "react"
+import Category from "./category"
+import Footer from "./Footer"
+import ProductItem from "./ProductItem"
+import Search from "./Search"
 
 export default function Layout({ title, children }) {
+  const fetchImage = async () => {
+    const response = await axios
+      .get("https://www.fastxpo.com/mediatorpos/385/getoutlet.htm")
+      .catch((err) => {
+        console.log("Err", err)
+      })
+    console.log(response.data.stores)
+  }
+  useEffect(() => {
+    fetchImage()
+  }, [])
   return (
     <>
       <Head>
@@ -14,8 +30,18 @@ export default function Layout({ title, children }) {
         <header>
           <nav className="flex items-center justify-between h-12 px-4 shadow-md">
             <Link href="/">
-              <a className="text-xl font-bold tracking-widest">TKS</a>
+              <a className="flex items-center justify-center gap-4 text-xl font-bold tracking-widest">
+                <img
+                  src="https://www.fastxpo.com/mediatorpos//images/outlet/2614692498348358tks_%20provision.jpg"
+                  alt="TKS"
+                  className="h-12 rounded-full hover:rounded-lg"
+                />
+                TKS
+              </a>
             </Link>
+            <div className="items-center justify-center">
+              <Search />
+            </div>
             <div className="flex items-center justify-center">
               <div>
                 <Link href="/">
@@ -29,18 +55,26 @@ export default function Layout({ title, children }) {
                 <a className="p-2">Cart</a>
               </Link>
               <Link href="/">
-                <a className="p-2">Let's Chat</a>
+                <a className="p-2">Lets Chat</a>
               </Link>
             </div>
           </nav>
         </header>
-        <main className="container px-4 m-auto mt-4">{children}</main>
-        <footer className="flex justify-center h-10 shadow-inner items">
+        <div className="flex flex-row py-5">
+          <div className="basis-1/5">
+            <Category />
+          </div>
+          <ProductItem />
+          <main className="container px-4 m-auto mt-4">{children}</main>
+        </div>
+
+        <Footer />
+        {/* <footer className="flex justify-center h-10 shadow-inner items">
           <p>
             Powered by{" "}
             <a href="https://www.fastxpo.com/fxp/index.htm">@Fastexpo</a>
           </p>
-        </footer>
+        </footer> */}
       </div>
     </>
   )
