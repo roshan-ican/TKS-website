@@ -1,8 +1,9 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import Products from "./Products"
+import Pagination from "./Pagination"
 
-export default function ProductItem() {
+const ProductItem = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
@@ -17,17 +18,32 @@ export default function ProductItem() {
     setLoading(true)
     const res = await axios.get(url, { headers })
     setData(res.data)
+
     setLoading(false)
   }
   useEffect(() => {
     fetchProducts()
   }, [])
-  //only runs when it mounts
 
+  // //only runs when it mounts
+  // get current posts
+  // const indexOfLastProduct = currentPage * productsPerPage
+  // const indexOfFirstProdcts = indexOfLastProduct - productsPerPage
+  // const currentProducts = data.slice(indexOfFirstProdcts, indexOfLastProduct)
+
+  // change page
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber)
   return (
-    <div className="container mx-auto sm:px-4 mt-5">
-      <h1 className="text-dark-600 mb-3">Products</h1>
+    <div>
+      <h1 className="font-bold items-center justify-center">Products</h1>
       <Products data={data} loading={loading} />
+      {/* <Pagination
+        productsPerPage={productsPerPage}
+        totalProducts={Products.length}
+        paginate={paginate}
+      /> */}
     </div>
   )
 }
+
+export default ProductItem

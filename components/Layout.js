@@ -60,21 +60,14 @@ export default function Layout({ title, children }) {
             </div>
           </nav>
         </header>
-        <div className="flex flex-row py-5">
-          <div className="basis-1/5">
-            <Category />
+        <div className="flex flex-row basis-1/4 gap-4">
+          <Category />
+          <div className="flex flex-cols-3">
+            <ProductItem />
           </div>
-          <ProductItem />
-          <main className="container px-4 m-auto mt-4">{children}</main>
         </div>
 
         <Footer />
-        {/* <footer className="flex justify-center h-10 shadow-inner items">
-          <p>
-            Powered by{" "}
-            <a href="https://www.fastxpo.com/fxp/index.htm">@Fastexpo</a>
-          </p>
-        </footer> */}
       </div>
     </>
   )

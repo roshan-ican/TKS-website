@@ -133,10 +133,10 @@ export default function Footer() {
             <div class="row">
               <div class="col-md-6 col-12">
                 <div class="ltn__copyright-design clearfix">
-                  <p>
+                  <strong>
                     All Rights Reserved @ Company{" "}
                     <span class="current-year">2022</span>
-                  </p>
+                  </strong>
                 </div>
               </div>
               <div class="col-md-6 col-12 align-self-center">

@@ -6,12 +6,30 @@ const Products = ({ data, loading }) => {
   }
   console.log(data.menudetails, "menudetails")
   return (
-    <div className="card">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 py-4">
       {data?.menudetails?.map((menudetail) =>
         menudetail.products?.map((product) => {
           return (
             <div key={product.productid}>
-              <p>{product.productname}</p>
+              <a>
+                <img
+                  src={product.imagename}
+                  alt={product.productname}
+                  className="object-contain w-32 h-48 rounded shadow"
+                />
+              </a>
+
+              <div>
+                <a>
+                  <h2 className="text-lg">{product.productname}</h2>
+                </a>
+                <strong className="flex items-center justify-between">
+                  ₹{product.sellprice}
+                </strong>
+                <button type="button" className="primary-button">
+                  Add to Cart
+                </button>
+              </div>
             </div>
           )
         })
