@@ -1,13 +1,27 @@
 import axios from "axios"
 import Head from "next/head"
 import Link from "next/link"
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
+import { Store } from "../utilis/Store"
 import Category from "./category"
 import Footer from "./Footer"
 import ProductItem from "./ProductItem"
 import Search from "./Search"
+import { Context } from "../context"
+import Cart from "./Cart"
+import Navbar from "./Navbar"
+import Pagination from "./Pagination"
 
 export default function Layout({ title, children }) {
+  const { state } = useContext(Context)
+  console.log("---->", state)
+  const { cart } = state
+  let itemCount = 0
+
+  for (const [key, value] of Object.entries(cart)) {
+    itemCount = itemCount + cart[key].qty
+  }
+
   const fetchImage = async () => {
     const response = await axios
       .get("https://www.fastxpo.com/mediatorpos/385/getoutlet.htm")
@@ -28,45 +42,15 @@ export default function Layout({ title, children }) {
       </Head>
       <div className="flex flex-col min-h-screen justify-content">
         <header>
-          <nav className="flex items-center justify-between h-12 px-4 shadow-md">
-            <Link href="/">
-              <a className="flex items-center justify-center gap-4 text-xl font-bold tracking-widest">
-                <img
-                  src="https://www.fastxpo.com/mediatorpos//images/outlet/2614692498348358tks_%20provision.jpg"
-                  alt="TKS"
-                  className="h-12 rounded-full hover:rounded-lg"
-                />
-                TKS
-              </a>
-            </Link>
-            <div className="items-center justify-center">
-              <Search />
-            </div>
-            <div className="flex items-center justify-center">
-              <div>
-                <Link href="/">
-                  <a className="p-2">Home</a>
-                </Link>
-                <Link href="/login">
-                  <a className="p-2">Login</a>
-                </Link>
-              </div>
-              <Link href="/cart">
-                <a className="p-2">Cart</a>
-              </Link>
-              <Link href="/">
-                <a className="p-2">Lets Chat</a>
-              </Link>
-            </div>
-          </nav>
+          <Navbar />
         </header>
-        <div className="flex flex-row basis-1/4 gap-4">
+        <div className="flex flex-row gap-4 basis-1/4">
           <Category />
           <div className="flex flex-cols-3">
             <ProductItem />
           </div>
         </div>
-
+        {/* <Pagination/> */}
         <Footer />
       </div>
     </>

@@ -1,10 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
+import { CartStateContext, Context, toggleCartPopup } from "../context"
 
 const Products = ({ data, loading }) => {
-  if (loading) {
-    return <>Loading...</>
-  }
-  console.log(data.menudetails, "menudetails")
+  const { dispatch, state } = useContext(Context)
+  
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 py-4">
       {data?.menudetails?.map((menudetail) =>
@@ -26,7 +25,15 @@ const Products = ({ data, loading }) => {
                 <strong className="flex items-center justify-between">
                   ₹{product.sellprice}
                 </strong>
-                <button type="button" className="primary-button">
+
+                <button
+                  type="button"
+                  className="primary-button p-2"
+                  onClick={() => {
+                    dispatch({ type: "ADD_TO_CART", payload: product })
+                    setTimeout(() => console.log(state, "state"), 1000)
+                  }}
+                >
                   Add to Cart
                 </button>
               </div>
@@ -39,40 +46,3 @@ const Products = ({ data, loading }) => {
 }
 
 export default Products
-
-//   data.products.map((product) => {
-//     return (
-//       <div key={product.productid}>
-//         <img
-//           src={product.imagename}
-//           alt={product.productname}
-//           className="object-contain w-32 h-48 rounded shadow"
-//         />
-//         <p className="text-lg">{product.productname}</p>
-//         <button className="primary-button" type="button">
-//           Add to Cart
-//         </button>
-//       </div>
-//     )
-//   })
-// )
-
-{
-  /* {data.menudetails.map((data) =>
-        data.products.map((product) => {
-          return (
-            <div key={product.productid}>
-              <img
-                src={product.imagename}
-                alt={product.productname}
-                className="object-contain w-32 h-48 rounded shadow"
-              />
-              <p className="text-lg">{product.productname}</p>
-              <button className="primary-button" type="button">
-                Add to Cart
-              </button>
-            </div>
-          )
-        })
-      )} */
-}
