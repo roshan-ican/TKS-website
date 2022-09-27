@@ -1,9 +1,14 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { CartStateContext, Context, toggleCartPopup } from "../context"
+import Pagination from "./Pagination"
 
 const Products = ({ data, loading }) => {
+
+
   const { dispatch, state } = useContext(Context)
+
   
+
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 py-4">
       {data?.menudetails?.map((menudetail) =>
@@ -36,6 +41,8 @@ const Products = ({ data, loading }) => {
                 >
                   Add to Cart
                 </button>
+
+             
               </div>
             </div>
           )
