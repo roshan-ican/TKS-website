@@ -3,11 +3,7 @@ import { CartStateContext, Context, toggleCartPopup } from "../context"
 import Pagination from "./Pagination"
 
 const Products = ({ data, loading }) => {
-
-
   const { dispatch, state } = useContext(Context)
-
-  
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 py-4">
@@ -41,8 +37,6 @@ const Products = ({ data, loading }) => {
                 >
                   Add to Cart
                 </button>
-
-             
               </div>
             </div>
           )

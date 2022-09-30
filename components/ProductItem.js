@@ -37,10 +37,10 @@ const ProductItem = () => {
           return (
             <button key={product.productid}>
               <Pagination
-                totalPosts={data.length}
-                postsPerPage={postsPerPage}
-                setCurrentPage={setCurrentPage}
-                currentPage={currentPage}
+                // totalPosts={data.length}
+                // postsPerPage={postsPerPage}
+                // setCurrentPage={setCurrentPage}
+                // currentPage={currentPage}
               />
             </button>
           )
